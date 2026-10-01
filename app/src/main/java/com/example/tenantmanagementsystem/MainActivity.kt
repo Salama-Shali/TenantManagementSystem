@@ -1,5 +1,5 @@
 package com.example.tenantmanagementsystem
-
+import com.example.tenantmanagementsystem.databinding.ActivityMainBinding
 import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -10,27 +10,21 @@ import android.widget.TextView
 import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        var tenantName = findViewById<EditText>(R.id.EditTenantName)
-        var tenantPhoneNumber = findViewById<EditText>(R.id.EditPhone)
-        var rentPaid = findViewById<EditText>(R.id.EditRent)
-        var buttonDisplay= findViewById<Button>(R.id.ButtonSaveDetails)
-        var displayTextView = findViewById<TextView>(R.id.TextviewDisplay)
-
-
-        buttonDisplay.setOnClickListener {
-
+        binding.saveButton.setOnClickListener {
+            val name = binding.tenantNameEditText.text.toString()
+            val phone = binding.phoneEditText.text.toString()
+            val rent = binding.rentEditText.text.toString()
+            binding.tenantResultTextView.text =
+                "Tenant: $name\nPhone: $phone\nRent: KSh $rent"
         }
 
-        var name = tenantName.text.toString()
-        var phone = tenantPhoneNumber.text.toString()
-        var rent = rentPaid.text.toString()
-
-        displayTextView.text = "The tenant added is: \nTenant Name: $name \nTenant Phone: $phone \nTenant Rent: $rent"
 
     }
 }

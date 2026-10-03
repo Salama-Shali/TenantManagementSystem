@@ -14,15 +14,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
+
         setContentView(binding.root)
 
         binding.saveButton.setOnClickListener {
             val name = binding.tenantNameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             val rent = binding.rentEditText.text.toString()
-            binding.tenantResultTextView.text =
-                "Tenant: $name\nPhone: $phone\nRent: KSh $rent"
+            val tenant = Tenant(name, phone, rent)
+            binding.tenant = tenant
         }
 
 

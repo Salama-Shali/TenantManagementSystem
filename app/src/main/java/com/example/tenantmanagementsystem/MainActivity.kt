@@ -19,10 +19,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener {
             val name = binding.tenantNameEditText.text.toString()
+
+            if (name.isBlank()) {
+                binding.tenantNameEditText.error = "Tenant name is required"
+                return@setOnClickListener
+            }
+
             val phone = binding.phoneEditText.text.toString()
             val rent = binding.rentEditText.text.toString()
             val tenant = Tenant(name, phone, rent)
             binding.tenant = tenant
+            binding.tenantNameEditText.text.clear()
+            binding.phoneEditText.text.clear()
+            binding.rentEditText.text.clear()
         }
 
 

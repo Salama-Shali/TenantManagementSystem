@@ -12,13 +12,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val loggedInEmail = intent.getStringExtra("EMAIL")
+
+        if (loggedInEmail != null) {
+            Toast.makeText(this, "Logged in as $loggedInEmail", Toast.LENGTH_SHORT).show()
+        }
         binding.saveButton.setOnClickListener {
             val name = binding.tenantNameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             val rent = binding.rentEditText.text.toString()
+
+            if (name.isBlank()) {
+                binding.tenantNameEditText.error = "Required"
+                return@setOnClickListener
+            }
+
+            if (phone.isBlank()) {
+                binding.phoneEditText.error = "Required"
+                return@setOnClickListener
+            }
+
+            if (rent.isBlank()) {
+                binding.rentEditText.error = "Required"
+                return@setOnClickListener
+            }
+
             val tenant = Tenant(name, phone, rent)
             binding.tenant = tenant
-
             lastTenant = tenant
         }
         binding.callButton.setOnClickListener {
@@ -29,6 +49,19 @@ class MainActivity : AppCompatActivity() {
             }
             val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${tenant.phone}"))
             startActivity(intent)
+        }
+        binding.shareButton.setOnClickListener {
+            val tenant = lastTenant
+
+            if (tenant == null) {
+                Toast.makeText(this, "Save a tenant first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, tenant.summary())
+            startActivity(Intent.createChooser(intent, "Share tenant"))
         }
     }
 }

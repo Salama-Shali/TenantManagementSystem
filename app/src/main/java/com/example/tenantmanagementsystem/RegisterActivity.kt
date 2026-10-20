@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tenantmanagementsystem.databinding.ActivityRegisterBinding
+import android.util.Log
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("TENANT_LIFECYCLE", "RegisterActivity: onCreate")
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.registerButton.setOnClickListener {
@@ -31,4 +33,30 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
     }
+    override fun onStart() {
+        super.onStart()
+        Log.d("TENANT_LIFECYCLE", "RegisterActivity: onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TENANT_LIFECYCLE", "RegisterActivity: onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("TENANT_LIFECYCLE", "RegisterActivity: onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("TENANT_LIFECYCLE", "RegisterActivity: onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TENANT_LIFECYCLE", "RegisterActivity: onDestroy")
+    }
 }
+//When I opened the Register screen, RegisterActivity went through onCreate(), onStart(), and onResume(). When I tapped “Already have an account? Log in”, RegisterActivity went through onPause(), while LoginActivity went through onStart() and onResume(). After that, RegisterActivity went through onStop() and onDestroy().
+//RegisterActivity gets onDestroy() because its click handler calls finish() after navigating back to LoginActivity.

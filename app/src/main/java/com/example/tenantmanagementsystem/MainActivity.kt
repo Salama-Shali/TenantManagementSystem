@@ -9,6 +9,7 @@ import android.util.Log
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var lastTenant: Tenant? = null
+    private var saveTapCount = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Write a message to Logcat every time onCreate() runs.
@@ -25,12 +26,20 @@ class MainActivity : AppCompatActivity() {
             val phone = savedInstanceState.getString("tenant_phone")
             val rent = savedInstanceState.getString("tenant_rent")
        // Only rebuild the tenant if all three were saved
+            saveTapCount = savedInstanceState.getInt("save_tap_count", 0)
             if (name != null && phone != null && rent != null) {
                 val tenant = Tenant(name, phone, rent)
          // Put the tenant back in BOTH places it lived before rotating:
                 lastTenant = tenant // so CALL TENANT works again
                 binding.tenant = tenant // so the summary appears again (Data Binding)
             }
+        }
+        if (savedInstanceState != null) {
+            Toast.makeText(
+                this,
+                "SAVE tapped $saveTapCount times",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         val loggedInEmail = intent.getStringExtra("EMAIL")
 
@@ -56,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                 binding.rentEditText.error = "Required"
                 return@setOnClickListener
             }
+            saveTapCount++
 
             val tenant = Tenant(name, phone, rent)
             binding.tenant = tenant
@@ -100,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             outState.putString("tenant_phone", tenant.phone)
             outState.putString("tenant_rent", tenant.rent)
         }
+        outState.putInt("save_tap_count", saveTapCount)
     }
     // ── LIFECYCLE METHODS ─────────────────────────────────────────
 // Android calls each of these automatically. We only add a log

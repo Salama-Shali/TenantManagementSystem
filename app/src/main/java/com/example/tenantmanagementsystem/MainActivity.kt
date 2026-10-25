@@ -45,31 +45,13 @@ class MainActivity : AppCompatActivity() {
         // 3. Connect the App Bar to navigation:
 // the title comes from each destination's android:label
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.dashboardFragment, R.id.addTenantFragment, R.id.viewTenantsFragment, R.id.aboutFragment),
-            binding.drawerLayout
+            setOf(R.id.dashboardFragment, R.id.addTenantFragment, R.id.viewTenantsFragment, R.id.aboutFragment)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.navView.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.logout -> {
-                    val intent = Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    true
-                }
+        binding.bottomNav.setupWithNavController(navController)
 
-                else -> {
-                    item.onNavDestinationSelected(navController)
-                    binding.drawerLayout.closeDrawers()
-                    true
-                }
-            }
-        }
-        val email = intent.getStringExtra("EMAIL")
-        val headerBinding = NavHeaderBinding.bind(binding.navView.getHeaderView(0))
-        headerBinding.headerEmailTextView.text = email ?: "Signed in"
+
     }
 
     // 4. Make the App Bar's back arrow work

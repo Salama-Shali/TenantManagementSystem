@@ -13,5 +13,8 @@
             android:id="@+id/viewTenantsFragment"
             android:icon="@android:drawable/ic_menu_view"
             android:title="View Tenants" />
+        <item
+            android:id="@+id/aboutFragment"
+            android:title="About" />
     </group>
 </menu>

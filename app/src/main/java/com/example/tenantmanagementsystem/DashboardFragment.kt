@@ -1,5 +1,6 @@
 package com.example.tenantmanagementsystem
 
+import androidx.navigation.fragment.findNavController
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,16 @@ class DashboardFragment : Fragment() {
         binding.tenantCountTextView.text = "Tenants\n$tenantCount"
 // totalRentTextView ← android:id="@+id/totalRentTextView"
         binding.totalRentTextView.text = "Total rent\nKSh %,.0f".format(totalRent)
+        binding.addTenantButton.setOnClickListener {
+            val action = DashboardFragmentDirections.actionDashboardFragmentToAddTenantFragment()
+            findNavController().navigate(action)
+        }
+        binding.viewTenantsButton.setOnClickListener {
+            val action = DashboardFragmentDirections.actionDashboardFragmentToViewTenantsFragment()
+            findNavController().navigate(action)
+        }
     }
+
     // The view is destroyed: let go of it
     override fun onDestroyView() {
         super.onDestroyView()

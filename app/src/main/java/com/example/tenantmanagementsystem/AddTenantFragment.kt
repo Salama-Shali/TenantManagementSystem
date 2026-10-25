@@ -1,5 +1,6 @@
 package com.example.tenantmanagementsystem
 
+import android.util.Log
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import android.os.Bundle
@@ -11,6 +12,10 @@ import com.example.tenantmanagementsystem.databinding.FragmentAddTenantBinding
 class AddTenantFragment : Fragment() {
     private var _binding: FragmentAddTenantBinding? = null
     private val binding get() = _binding!!
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onCreate")
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,6 +26,7 @@ class AddTenantFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onViewCreated")
 // saveButton ← android:id="@+id/saveButton" in fragment_add_tenant.xml
         binding.saveButton.setOnClickListener {
 // Read the three EditTexts in fragment_add_tenant.xml
@@ -44,8 +50,32 @@ class AddTenantFragment : Fragment() {
             findNavController().navigate(action)
         }
     }
+    override fun onStart() {
+        super.onStart()
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onStop")
+    }
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onDestroyView")
         _binding = null
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("ADD_TENANT_LIFECYCLE", "AddTenantFragment: onDestroy")
     }
 }

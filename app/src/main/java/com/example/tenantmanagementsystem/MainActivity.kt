@@ -1,5 +1,8 @@
 package com.example.tenantmanagementsystem
 
+import android.content.Intent
+import android.view.MenuItem
+import androidx.navigation.ui.onNavDestinationSelected
 import android.view.Menu
 import android.os.Bundle
 import android.util.Log
@@ -52,6 +55,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
+    }
+    // What happens when a menu item is tapped
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_logout) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            return true
+        }
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     // Called when the activity becomes visible to the user

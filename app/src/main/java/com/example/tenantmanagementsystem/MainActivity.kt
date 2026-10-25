@@ -1,5 +1,6 @@
 package com.example.tenantmanagementsystem
 
+import androidx.navigation.ui.setupWithNavController
 import android.content.Intent
 import android.view.MenuItem
 import androidx.navigation.ui.onNavDestinationSelected
@@ -42,9 +43,13 @@ class MainActivity : AppCompatActivity() {
 
         // 3. Connect the App Bar to navigation:
 // the title comes from each destination's android:label
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.dashboardFragment, R.id.addTenantFragment, R.id.viewTenantsFragment),
+            binding.drawerLayout
+        )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.navView.setupWithNavController(navController)
     }
 
     // 4. Make the App Bar's back arrow work

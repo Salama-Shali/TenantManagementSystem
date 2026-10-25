@@ -1,5 +1,6 @@
 package com.example.tenantmanagementsystem
 
+import android.view.Menu
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,11 @@ class MainActivity : AppCompatActivity() {
     // 4. Make the App Bar's back arrow work
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+    // Turn main_menu.xml into menu items in the App Bar
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
     // Called when the activity becomes visible to the user

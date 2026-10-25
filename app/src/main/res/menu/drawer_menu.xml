@@ -17,4 +17,9 @@
             android:id="@+id/aboutFragment"
             android:title="About" />
     </group>
+    <group>
+        <item
+            android:id="@+id/logout"
+            android:title="Logout" />
+    </group>
 </menu>

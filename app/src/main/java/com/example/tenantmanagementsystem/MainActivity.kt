@@ -50,7 +50,23 @@ class MainActivity : AppCompatActivity() {
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.navView.setupWithNavController(navController)
+        binding.navView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.logout -> {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    true
+                }
+
+                else -> {
+                    item.onNavDestinationSelected(navController)
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+            }
+        }
         val email = intent.getStringExtra("EMAIL")
         val headerBinding = NavHeaderBinding.bind(binding.navView.getHeaderView(0))
         headerBinding.headerEmailTextView.text = email ?: "Signed in"

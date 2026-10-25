@@ -38,6 +38,10 @@ class AddTenantFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (phone.filter { it.isDigit() }.length < 10) {
+                binding.phoneEditText.error = "Enter a valid phone number"
+                return@setOnClickListener
+            }
             val tenant = Tenant(name, phone, rent)
 // Add to the shared list (the Dashboard and View Tenants read it)
             TenantRepository.addTenant(tenant)

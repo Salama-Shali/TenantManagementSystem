@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         // 3. Connect the App Bar to navigation:
 // the title comes from each destination's android:label
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.dashboardFragment, R.id.addTenantFragment, R.id.viewTenantsFragment),
+            setOf(R.id.dashboardFragment, R.id.addTenantFragment, R.id.viewTenantsFragment, R.id.aboutFragment),
             binding.drawerLayout
         )
 

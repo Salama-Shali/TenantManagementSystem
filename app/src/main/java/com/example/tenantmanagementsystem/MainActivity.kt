@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.tenantmanagementsystem.databinding.ActivityMainBinding
+import com.example.tenantmanagementsystem.databinding.NavHeaderBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +51,9 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+        val email = intent.getStringExtra("EMAIL")
+        val headerBinding = NavHeaderBinding.bind(binding.navView.getHeaderView(0))
+        headerBinding.headerEmailTextView.text = email ?: "Signed in"
     }
 
     // 4. Make the App Bar's back arrow work

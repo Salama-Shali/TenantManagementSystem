@@ -1,4 +1,4 @@
-package viewmodel
+package com.example.tenantmanagementsystem.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

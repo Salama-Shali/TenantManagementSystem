@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -47,7 +48,7 @@ dependencies {
     // Architecture Components: ViewModel and LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
-// Gives Fragments "by activityViewModels()" (used in Stage 4)
+    // Gives Fragments "by activityViewModels()" (used in Stage 4)
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
@@ -58,4 +59,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
+    // Room (Stage 3)
+    implementation("androidx.room:room-runtime:2.7.2")
+    implementation("androidx.room:room-ktx:2.7.2")
+    ksp("androidx.room:room-compiler:2.7.2")
 }

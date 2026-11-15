@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.tenantmanagementsystem.ui.viewmodel.TenantViewModel
-import com.example.tenantmanagementsystem.data.repository.TenantRepository
+
 
 // Generated from fragment_dashboard.xml (View Binding)
 import com.example.tenantmanagementsystem.databinding.FragmentDashboardBinding

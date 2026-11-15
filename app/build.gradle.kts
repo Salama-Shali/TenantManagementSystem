@@ -24,6 +24,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        versionCode = 1 // a number that goes up with every release
+        versionName = "1.0" // the version users see
     }
 
     buildTypes {

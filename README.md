@@ -19,4 +19,4 @@ Screens → TenantViewModel (LiveData) → TenantRepository → Room
 | 3 Room | Kimberly Amani | 175852 | [PR #2](https://github.com/Salama-Shali/TenantManagementSystem/pull/2) |
 | 4 Screens | Juliet Nyakiamo | 200159 | [PR #3](https://github.com/Salama-Shali/TenantManagementSystem/pull/3) |
 | 5 Data integration | Elizabeth Gitacu | 189600 | [PR #4](https://github.com/Salama-Shali/TenantManagementSystem/pull/4) |
-| 6 Release | Roselyne Salama Shali Mwalagho | 192789 | Pending |
+| 6 Release | Roselyne Salama Shali Mwalagho | 192789 | [PR #5](https://github.com/Salama-Shali/TenantManagementSystem/pull/5)|

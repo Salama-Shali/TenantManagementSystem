@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.tenantmanagementsystem.data.repository.TenantRepository
+import androidx.fragment.app.activityViewModels
+import com.example.tenantmanagementsystem.ui.viewmodel.TenantViewModel
 import com.example.tenantmanagementsystem.databinding.FragmentViewTenantsBinding
 class ViewTenantsFragment : Fragment() {
     private var _binding: FragmentViewTenantsBinding? = null
     private val binding get() = _binding!!
     private val args: ViewTenantsFragmentArgs by navArgs()
+    private val viewModel: TenantViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,11 +37,9 @@ class ViewTenantsFragment : Fragment() {
                 startActivity(intent)
             }
         }
-        val tenants = TenantRepository.tenants
-        if (tenants.isEmpty()) {
-            binding.allTenantsTextView.text = "No tenants yet. Add one from the Dashboard."
-        } else {
-            binding.allTenantsTextView.text = tenants.joinToString("\n\n") { it.summary() }
+        // OBSERVER: runs now, and again every time allTenantsText changes
+        viewModel.allTenantsText.observe(viewLifecycleOwner) { text ->
+            binding.allTenantsTextView.text = text
         }
     }
     override fun onDestroyView() {

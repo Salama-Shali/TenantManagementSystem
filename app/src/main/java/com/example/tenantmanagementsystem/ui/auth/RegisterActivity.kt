@@ -22,6 +22,11 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            getSharedPreferences("auth", MODE_PRIVATE).edit()
+                .putString("name", fullName)
+                .putString("email", email.lowercase())
+                .putString("password_hash", hashPassword(password))
+                .apply()
             Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
             intent.putExtra("EMAIL", email)

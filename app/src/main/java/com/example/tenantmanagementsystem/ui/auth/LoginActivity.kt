@@ -27,6 +27,13 @@ class LoginActivity : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
             }
+            val prefs = getSharedPreferences("auth", MODE_PRIVATE)
+            if (email.lowercase() != prefs.getString("email", null) ||
+                hashPassword(password) != prefs.getString("password_hash", null)
+            ) {
+                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("EMAIL", email)
             startActivity(intent)

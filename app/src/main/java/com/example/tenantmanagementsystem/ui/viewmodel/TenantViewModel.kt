@@ -61,7 +61,9 @@ class TenantViewModel(application: Application) :
         if (
             cleanName.isEmpty() ||
             cleanPhone.isEmpty() ||
-            cleanRent.isEmpty()
+            cleanRent.isEmpty() ||
+            cleanRent.toDoubleOrNull() == null ||
+            cleanPhone.length < 10
         ) {
             return null
         }
